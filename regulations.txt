@@ -1,0 +1,5 @@
+Snapper:30.0
+Flathead:33.0
+Bream:25.0
+Tailor:30.0
+Crab:10.0
