@@ -49,8 +49,8 @@ Snapper:30.0 Flathead:33.0 Bream:25.0 Tailor:30.0 Crab:10.0
 In terminal, navigate to the folder containing the code and run:
 
 ```bash
-g++ -std=c++17 -I. -o sea_app *.cpp
-./sea_app
+g++ -std=c++17 -I. -o sea_plus_plus *.cpp
+./sea_plus_plus
 
 Sample Run:
 Welcome to Sea++!
