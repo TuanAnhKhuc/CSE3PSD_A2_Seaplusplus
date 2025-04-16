@@ -12,11 +12,11 @@ SeaPlusPlusEngine::SeaPlusPlusEngine() {
 }
 
 bool SeaPlusPlusEngine::isVertebrate(const std::string& type) {
-    return (type == "Snapper" || type == "Flathead" || type == "Bream" || type == "Tailor");
+    return (type == "Snapper" || type == "Flathead(Tiger)" || type == "Bream(Yellowfin)" || type == "Tailor" || type == "Teraglin");
 }
 
 bool SeaPlusPlusEngine::isInvertebrate(const std::string& type) {
-    return (type == "Crab");
+    return (type == "Crab (Spanner)" || type == "Abalone");
 }
 
 

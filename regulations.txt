@@ -1,5 +1,8 @@
 Snapper:30.0
-Flathead:33.0
-Bream:25.0
+Flathead(Tiger):33.0
+Bream(Yellowfin):25.0
 Tailor:30.0
-Crab:10.0
+Teraglin:38.0
+Crab(Spanner):9.3
+Abalone:11.7
+

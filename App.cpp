@@ -18,7 +18,7 @@ void App::handleInteraction() {
     float size;
     std::string eggStatus;
 
-    std::cout << "Enter creature type (e.g., Snapper, Crab): ";
+    std::cout << "Enter creature type (Snapper, Flathead(Tiger), Bream(Yellowfin), Tailor, Teraglin, Crab(Spanner), Abalone): ";
     std::getline(std::cin, type);
 
     std::cout << "Enter size in cm: ";
