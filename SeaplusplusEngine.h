@@ -19,6 +19,7 @@ private:
     std::shared_ptr<RegulationLoader> regulationLoader;
 
     bool isVertebrate(const std::string& type);
+    bool isInvertebrate(const std::string& type);
 };
 
 #endif // SEAPLUSPLUSENGINE_H
