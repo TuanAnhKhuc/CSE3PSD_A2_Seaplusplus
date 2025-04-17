@@ -36,6 +36,34 @@
 - **VertebrateChecker / InvertebrateChecker**: Implements validation rules using `RegulationLoader`.
 - **RegulationLoader**: Loads legal size limits from `regulations.txt`.
 
+**🧍‍♂️ Angler & 🧺 Bag (New Classes)**
+As part of the extended design, two new classes were introduced:
+
+**✅ Angler**
+
+Represents the user of the application (the person fishing).
+Maintains a personal Bag of caught sea creatures.
+Acts as the link between the App and the user's collected data.
+Key Method:
+
+Bag& getBag();  // Returns reference to the Angler's bag
+**✅ Bag**
+
+A collection that stores SeaCreature objects caught by the Angler.
+Supports:
+addCreature(std::shared_ptr<SeaCreature>) – Add to bag.
+listContents() – Print caught creatures.
+clearBag() – Empty the bag.
+This modular addition separates the responsibilities of tracking and storing catches from validation logic. It makes the system easier to maintain and paves the way for future support of multiple anglers or session-based histories.
+
+**🧩 Design Evolution**
+Initially, the Sea++ system focused only on validating sea creatures. With the introduction of Angler and Bag, we added a user-centric model:
+
+🪝 App → Angler → Bag: The App interacts with a single Angler, who stores all catches in their Bag.
+📊 The system now remembers previous catches within a session and can display a list before exiting.
+🧼 This approach enhances data encapsulation and sets a strong foundation for multi-user support.
+
+
 ---
 
 ## 📄 Sample `regulations.txt`
