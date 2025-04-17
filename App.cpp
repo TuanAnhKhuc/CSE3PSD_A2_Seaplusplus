@@ -2,12 +2,15 @@
 #include "SeaCreatureFactory.h"
 #include <iostream>
 
+// Constructor
+// Initializes the regulation loader, engine, and bag checker components
 App::App() {
     regulationLoader = std::make_shared<RegulationLoader>("regulations.txt");
     engine = std::make_shared<SeaPlusPlusEngine>();
     bagChecker = std::make_shared<BagChecker>(regulationLoader);
 }
 
+// Displays the welcome banner
 void App::displayWelcome() const {
     std::cout << "====================\n";
     std::cout << "Welcome to Sea++!\n";
@@ -15,6 +18,7 @@ void App::displayWelcome() const {
     std::cout << "====================\n\n";
 }
 
+// Displays the main menu options
 void App::showMenu() {
     std::cout << "\nMenu Options:\n";
     std::cout << "1. Create new angler and add catch\n";
@@ -26,12 +30,14 @@ void App::showMenu() {
     std::cout << "Choose an option: ";
 }
 
+// Handles option 1: Create new angler and add sea creatures to their bag
 void App::handleCreateAngler() {
     std::string name;
     std::cout << "Enter angler's name: ";
     std::getline(std::cin, name);
 
-    Angler angler(name);
+    Angler angler(name);  // Create angler object
+
     char addMore = 'y';
     while ((addMore == 'y' || addMore == 'Y') && !angler.getBag().isFull()) {
         std::string type, eggStr;
@@ -49,6 +55,7 @@ void App::handleCreateAngler() {
         std::getline(std::cin, eggStr);
         hasEggs = (eggStr == "yes" || eggStr == "Yes");
 
+        // Check if the angler has reached the catch limit for this species
         int currentCount = angler.getBag().getCountForSpecies(type);
         int maxAllowed = regulationLoader->getCatchLimit(type);
 
@@ -69,10 +76,11 @@ void App::handleCreateAngler() {
         }
     }
 
-    anglers.push_back(angler);
+    anglers.push_back(angler); // Add angler to the list
     std::cout << "Angler added.\n";
 }
 
+// Handles option 2: Display all anglers and their bag contents
 void App::handleViewAnglers() {
     if (anglers.empty()) {
         std::cout << "No anglers available.\n";
@@ -85,6 +93,7 @@ void App::handleViewAnglers() {
     }
 }
 
+// Handles option 3: Validate each angler's bag against regulations
 void App::handleValidateBags() {
     if (anglers.empty()) {
         std::cout << "No anglers to validate.\n";
@@ -97,22 +106,26 @@ void App::handleValidateBags() {
     }
 }
 
+// Handles option 4: Save all angler data to a file
 void App::handleSaveAll() {
     Angler::saveAllToFile(anglers, "Angler.txt");
 }
 
+// Handles option 5: Load all angler data from a file
 void App::handleLoadAll() {
     anglers = Angler::loadAllFromFile("Angler.txt");
 }
 
+// Main application loop
 void App::run() {
     displayWelcome();
     bool running = true;
+
     while (running) {
         showMenu();
         int choice;
         std::cin >> choice;
-        std::cin.ignore();
+        std::cin.ignore(); // Clear newline from buffer
 
         switch (choice) {
             case 1: handleCreateAngler(); break;
