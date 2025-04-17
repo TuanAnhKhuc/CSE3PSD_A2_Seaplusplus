@@ -12,6 +12,7 @@
 - Validates catch by **type**, **size**, and **egg-carrying status**  
 - Enforces regulation rules stored in a simple text file  
 - Implements clean software design using standard **design patterns**
+- Add Angler user to App, with individual bag
 
 ---
 
@@ -67,8 +68,18 @@ Initially, the Sea++ system focused only on validating sea creatures. With the i
 ---
 
 ## 📄 Sample `regulations.txt`
-Snapper:30.0 Flathead:33.0 Bream:25.0 Tailor:30.0 Crab:10.0
+Snapper:30.0, 10.
+Flathead(Tiger):33.0, 10.
+Bream(Yellowfin):25.0, 10.
+Tailor:30.0, 10.
+Teraglin:38.0, 5.
+Crab(Spanner):9.3, 10.
+Abalone:11.7, 2.
 
+## 📄 Sample `angler.txt`
+Angler: Tuan.
+Snapper,30,0.
+Abalone,12,0.
 
 ---
 
@@ -81,17 +92,88 @@ g++ -std=c++17 -I. -o sea_plus_plus *.cpp
 ./sea_plus_plus
 
 Sample Run:
+(base) tuananhkhuc@Tuans-MacBook-Pro CSE3PSD_A2_Seaplusplus % g++ -std=c++17 -I. -o sea_plus_plus *.cpp
+(base) tuananhkhuc@Tuans-MacBook-Pro CSE3PSD_A2_Seaplusplus % ./sea_plus_plus
+====================
 Welcome to Sea++!
+Fishing regulation assistant
+====================
 
+
+Menu Options:
+1. Create new angler and add catch
+2. View all anglers and bags
+3. Validate all bags
+4. Save all anglers to file
+5. Load all anglers from file
+0. Exit
+Choose an option: 1
+Enter angler's name: Tuan
 Enter creature type: Snapper
-Enter size in cm: 28
+Enter size in cm: 30
 Is it carrying eggs? (yes/no): no
+Add another? (y/n): y
+Enter creature type: Abalone
+Enter size in cm: 12
+Is it carrying eggs? (yes/no): no
+Add another? (y/n): n
+Angler added.
 
-Result: Release the Snapper (too small).
+Menu Options:
+1. Create new angler and add catch
+2. View all anglers and bags
+3. Validate all bags
+4. Save all anglers to file
+5. Load all anglers from file
+0. Exit
+Choose an option: 3
 
-Do you want to check another creature? (y/n): y
+Validating Bag for Angler: Tuan
 
-📝 Notes
+=== Validating Bag Contents ===
+Snapper: You may keep the Snapper.
+Abalone: You may keep the Abalone.
+===============================
 
-All regulation rules are loaded from regulations.txt.
+Menu Options:
+1. Create new angler and add catch
+2. View all anglers and bags
+3. Validate all bags
+4. Save all anglers to file
+5. Load all anglers from file
+0. Exit
+Choose an option: 2
+
+Angler: Tuan
+
+Bag Contents:
+- Snapper | 30cm | No eggs
+- Abalone | 12cm | No eggs
+
+
+Menu Options:
+1. Create new angler and add catch
+2. View all anglers and bags
+3. Validate all bags
+4. Save all anglers to file
+5. Load all anglers from file
+0. Exit
+Choose an option: 4
+All angler data saved to Angler.txt
+
+Menu Options:
+1. Create new angler and add catch
+2. View all anglers and bags
+3. Validate all bags
+4. Save all anglers to file
+5. Load all anglers from file
+0. Exit
+Choose an option:
+
+---
+
+## Notes
+
+All regulation rules(creature sizes, bag limit) are loaded from regulations.txt.
 Any fish carrying eggs will be released regardless of size.
+Angler info is saved to and load from Angler.txt. 
