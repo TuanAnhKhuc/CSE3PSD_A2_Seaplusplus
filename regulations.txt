@@ -1,8 +1,8 @@
-Snapper:30.0
-Flathead(Tiger):33.0
-Bream(Yellowfin):25.0
-Tailor:30.0
-Teraglin:38.0
-Crab(Spanner):9.3
-Abalone:11.7
+Snapper:30.0, 10
+Flathead(Tiger):33.0, 10
+Bream(Yellowfin):25.0, 10
+Tailor:30.0, 10
+Teraglin:38.0, 5
+Crab(Spanner):9.3, 10
+Abalone:11.7, 2
 
