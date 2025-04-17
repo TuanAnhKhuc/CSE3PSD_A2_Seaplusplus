@@ -1,7 +1,4 @@
-Angler: Kenny
-Snapper,30,1
-Abalone,11.7,0
-
 Angler: Tuan
 Snapper,30,0
+Abalone,12,0
 
