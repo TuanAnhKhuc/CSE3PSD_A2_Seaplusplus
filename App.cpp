@@ -21,7 +21,7 @@ void App::displayWelcome() const {
 // Displays the main menu options
 void App::showMenu() {
     std::cout << "\nMenu Options:\n";
-    std::cout << "1. Create new angler and add catch\n";
+    std::cout << "1. Create new angler and add catch(Snapper, Flathead(Tiger), Bream(Yellowfin), Tailor, Teraglin, Crab(Spanner), Abalone)\n";
     std::cout << "2. View all anglers and bags\n";
     std::cout << "3. Validate all bags\n";
     std::cout << "4. Save all anglers to file\n";
