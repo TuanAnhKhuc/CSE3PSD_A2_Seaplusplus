@@ -2,103 +2,116 @@
 
 ## 🎣 Overview
 
-**Sea++** is a command-line C++ application that helps recreational fishers comply with size and egg-carrying regulations for sea creatures. The program determines whether a catch can be kept or should be released, based on state fishing rules (like those published by NSW DPI).
+**Sea++** is a command-line C++ application that helps recreational fishers comply with fishing regulations concerning catch size and egg-carrying status. It determines whether a catch should be kept or released, based on regional rules (such as those published by NSW DPI).
 
 ---
 
 ## 🧰 Features
 
-- Interactive command-line interface  
-- Validates catch by **type**, **size**, and **egg-carrying status**  
-- Enforces regulation rules stored in a simple text file  
-- Implements clean software design using standard **design patterns**
-- Add Angler user to App, with individual bag
+- Interactive command-line interface
+- Validates catches based on **type**, **size**, and **egg-carrying status**
+- Enforces regulation rules loaded from a simple text file
+- Implements clean software design with standard **design patterns**
+- Supports Angler users, each maintaining their own **Bag** of catches
 
 ---
 
 ## 🧠 Design Patterns Used
 
-| Pattern        | Class(es)                        | Purpose                                                                 |
-|----------------|----------------------------------|-------------------------------------------------------------------------|
-| **Facade**     | `App`                            | Provides a simple interface to the entire system                        |
-| **Mediator**   | `SeaPlusPlusEngine`              | Coordinates validation between components without tight coupling        |
-| **Factory**    | `SeaCreatureFactory`             | Creates either a `VertebrateCreature` or `InvertebrateCreature`        |
-| **Abstract Base** | `SeaChecker`                  | Defines a validation interface shared by `VertebrateChecker` and `InvertebrateChecker` |
+| Pattern               | Class(es)                      | Purpose                                                           |
+|------------------------|---------------------------------|-------------------------------------------------------------------|
+| **Facade**             | `App`                           | Simplifies the system’s interface for the user                    |
+| **Mediator**           | `SeaPlusPlusEngine`             | Coordinates validation between independent components            |
+| **Factory**            | `SeaCreatureFactory`            | Instantiates either a `VertebrateCreature` or `InvertebrateCreature` |
+| **Abstract Base Class**| `SeaChecker`                    | Defines a common validation interface for all creature types     |
 
 ---
 
 ## 🏗️ Core Classes
 
-- **App**: Entry point. Manages user input and interaction.
-- **SeaPlusPlusEngine**: Delegates checking to the right `Checker` based on creature type.
-- **SeaCreatureFactory**: Creates sea creature objects.
-- **SeaCreature** (abstract): Base class with attributes like `type`, `size`, and `hasEggs`.
-- **VertebrateCreature / InvertebrateCreature**: Concrete subclasses of `SeaCreature`.
-- **VertebrateChecker / InvertebrateChecker**: Implements validation rules using `RegulationLoader`.
-- **RegulationLoader**: Loads legal size limits from `regulations.txt`.
-
-**🧍‍♂️ Angler & 🧺 Bag (New Classes)**
-As part of the extended design, two new classes were introduced:
-
-**✅ Angler**
-
-Represents the user of the application (the person fishing).
-Maintains a personal Bag of caught sea creatures.
-Acts as the link between the App and the user's collected data.
-Key Method:
-
-Bag& getBag();  // Returns reference to the Angler's bag
-**✅ Bag**
-
-A collection that stores SeaCreature objects caught by the Angler.
-Supports:
-addCreature(std::shared_ptr<SeaCreature>) – Add to bag.
-listContents() – Print caught creatures.
-clearBag() – Empty the bag.
-This modular addition separates the responsibilities of tracking and storing catches from validation logic. It makes the system easier to maintain and paves the way for future support of multiple anglers or session-based histories.
-
-**🧩 Design Evolution**
-Initially, the Sea++ system focused only on validating sea creatures. With the introduction of Angler and Bag, we added a user-centric model:
-
-🪝 App → Angler → Bag: The App interacts with a single Angler, who stores all catches in their Bag.
-📊 The system now remembers previous catches within a session and can display a list before exiting.
-🧼 This approach enhances data encapsulation and sets a strong foundation for multi-user support.
-
+- **App**: Main entry point. Manages the user interface and interactions.
+- **SeaPlusPlusEngine**: Mediates and delegates validation tasks based on creature type.
+- **SeaCreatureFactory**: Factory responsible for creating different types of sea creatures.
+- **SeaCreature** (abstract class): Defines shared attributes such as `type`, `size`, and `hasEggs`.
+- **VertebrateCreature / InvertebrateCreature**: Concrete subclasses of `SeaCreature`, representing different categories of catches.
+- **VertebrateChecker / InvertebrateChecker**: Implements validation logic according to species-specific regulations.
+- **RegulationLoader**: Loads legal size limits and bag limits from `regulations.txt`.
 
 ---
 
-## 📄 Sample `regulations.txt`
-Snapper:30.0, 10.
-Flathead(Tiger):33.0, 10.
-Bream(Yellowfin):25.0, 10.
-Tailor:30.0, 10.
-Teraglin:38.0, 5.
-Crab(Spanner):9.3, 10.
-Abalone:11.7, 2.
+## 🧍‍♂️ Angler & 🧺 Bag (Extended Design)
 
-## 📄 Sample `angler.txt`
-Angler: Tuan.
-Snapper,30,0.
-Abalone,12,0.
+As part of the system’s evolution, two new classes were introduced to add a user-centric model:
+
+### ✅ Angler
+- Represents the user (fisher) within the system.
+- Maintains a personal **Bag** of caught sea creatures.
+- Interfaces between the App and the user’s data.
+
+**Key Method**:
+```cpp
+Bag& getBag();  // Returns a reference to the Angler's bag
+```
+
+### ✅ Bag
+- Stores caught **SeaCreature** objects.
+- Supports:
+  - `addCreature(std::shared_ptr<SeaCreature>)` — Add a new catch to the bag.
+  - `listContents()` — Display the current catches.
+  - `clearBag()` — Empty all catches.
+
+### 🧩 Design Evolution
+Originally, Sea++ only validated individual catches. With the introduction of **Angler** and **Bag**, a more structured, session-based model was created:
+
+- 🪝 **App → Angler → Bag**: The App manages an Angler, who manages their Bag of catches.
+- 📊 Users can now view, validate, and save their full list of catches across a session.
+- 🧼 This modular design improves maintainability and sets the foundation for potential multi-user support.
 
 ---
 
-## 🚀 How to Compile
+## 📄 Example Files
 
-In terminal, navigate to the folder containing the code and run:
+### `regulations.txt`
+```plaintext
+Snapper:30.0,10
+Flathead(Tiger):33.0,10
+Bream(Yellowfin):25.0,10
+Tailor:30.0,10
+Teraglin:38.0,5
+Crab(Spanner):9.3,10
+Abalone:11.7,2
+```
 
-```bash
-g++ -std=c++17 -I. -o sea_plus_plus *.cpp
-./sea_plus_plus
+### `angler.txt`
+```plaintext
+Angler:Tuan
+Snapper,30,0
+Abalone,12,0
+```
 
-Sample Run:
-(base) tuananhkhuc@Tuans-MacBook-Pro CSE3PSD_A2_Seaplusplus % g++ -std=c++17 -I. -o sea_plus_plus *.cpp
-(base) tuananhkhuc@Tuans-MacBook-Pro CSE3PSD_A2_Seaplusplus % ./sea_plus_plus
+---
+
+## 🚀 How to Compile and Run
+
+1. Open terminal and navigate to the project directory.
+2. Compile the code:
+   ```bash
+   g++ -std=c++17 -I. -o sea_plus_plus *.cpp
+   ```
+3. Run the application:
+   ```bash
+   ./sea_plus_plus
+   ```
+
+---
+
+## 📋 Sample Usage
+
+```plaintext
 ====================
 Welcome to Sea++!
 Fishing regulation assistant
 ====================
-
 
 Menu Options:
 1. Create new angler and add catch
@@ -119,61 +132,37 @@ Is it carrying eggs? (yes/no): no
 Add another? (y/n): n
 Angler added.
 
-Menu Options:
-1. Create new angler and add catch
-2. View all anglers and bags
-3. Validate all bags
-4. Save all anglers to file
-5. Load all anglers from file
-0. Exit
 Choose an option: 3
 
 Validating Bag for Angler: Tuan
-
 === Validating Bag Contents ===
 Snapper: You may keep the Snapper.
 Abalone: You may keep the Abalone.
 ===============================
 
-Menu Options:
-1. Create new angler and add catch
-2. View all anglers and bags
-3. Validate all bags
-4. Save all anglers to file
-5. Load all anglers from file
-0. Exit
 Choose an option: 2
 
 Angler: Tuan
 
 Bag Contents:
-- Snapper | 30cm | No eggs
-- Abalone | 12cm | No eggs
+- Snapper | 30 cm | No eggs
+- Abalone | 12 cm | No eggs
 
-
-Menu Options:
-1. Create new angler and add catch
-2. View all anglers and bags
-3. Validate all bags
-4. Save all anglers to file
-5. Load all anglers from file
-0. Exit
 Choose an option: 4
-All angler data saved to Angler.txt
+All angler data saved to angler.txt
+```
 
-Menu Options:
-1. Create new angler and add catch
-2. View all anglers and bags
-3. Validate all bags
-4. Save all anglers to file
-5. Load all anglers from file
-0. Exit
-Choose an option:
+---
+---
+
+## 📝 Notes
+
+- **Regulations** (size limits, bag limits) are loaded from `regulations.txt`.
+- **Egg-carrying creatures** must always be released, regardless of size.
+- **Angler data** (name and catches) are saved to and loaded from `angler.txt`.
+- The App supports **multiple anglers**, each with **one bag per session**.
+- **Editing existing bags is not supported**; new catches require creating a new bag.
+- **All catches** are listed in the bag, even those that **fail validation**.
 
 ---
 
-## Notes
-
-All regulation rules(creature sizes, bag limit) are loaded from regulations.txt.
-Any fish carrying eggs will be released regardless of size.
-Angler info is saved to and load from Angler.txt. 
